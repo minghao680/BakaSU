@@ -80,7 +80,7 @@ config KSU_MULTI_MANAGER_SUPPORT
 choice
 	prompt "KernelSU Hooking Method"
 	depends on KSU
-	default KSU_TRACEPOINT_HOOK
+	default KSU_MANUAL_HOOK
 	help
 	  Select the hooking method for KernelSU.
 	  Note: Tracepoint Syscall Redirect hook is only supported for GKI2(5.10+)
@@ -131,7 +131,6 @@ config KSU_MANUAL_HOOK_AUTO_SETUID_HOOK
 	help
 	  THIS OPTION CAN NOT BE USED IN KERNEL_VERSION >= 6.8 DUE TO LSM CHANGES
 	  YOU MUST MANUALLY HOOK SETRESUID
-
 	  If you turn off this option, edit kernel/sys.c.
 	  In __sys_setresuid(uid_t ruid, uid_t euid, uid_t suid)
 	  add a call to ksu_handle_setresuid there.
@@ -143,7 +142,6 @@ config KSU_MANUAL_HOOK_AUTO_INITRC_HOOK
 	help
 	  THIS OPTION CAN NOT BE USED IN KERNEL_VERSION >= 6.8 DUE TO LSM CHANGES
 	  YOU MUST MANUALLY HOOK SYS_READ
-
 	  If you turn off this option, edit fs/read_write.c.
 	  in SYSCALL_DEFINE3(read, unsigned int, fd, char __user *, buf, size_t, count)
 	  add a call to ksu_handle_sys_read there.
